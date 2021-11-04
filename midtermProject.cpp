@@ -76,6 +76,7 @@ void moviesDataSet() {
                 std::string genre = genreTail.substr(0, genreTail.length()-3);
 
                 // save genre name in csv file
+                // TODO: we should change the delimiter ' ' because the space is not good delimiter for this case, conflicting some genres such as "Science fiction"
                 extractDataSet << genre << ' ';
             }
         }
