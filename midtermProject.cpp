@@ -30,7 +30,7 @@ struct credits {
 };
 
 void moviesDataSet() {
-    std::ifstream dataSet("tmdb_5000_movies.csv");
+    std::ifstream dataSet("data/tmdb_5000_movies.csv");
 
     movies data;
     std::string line;
@@ -70,7 +70,7 @@ void moviesDataSet() {
 }
 
 void creditsDataSet() {
-    std::ifstream dataSet("tmdb_5000_credits.csv");
+    std::ifstream dataSet("data/tmdb_5000_credits.csv");
 
     credits data;
     std::string line;

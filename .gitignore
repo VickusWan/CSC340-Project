@@ -1,0 +1,4 @@
+# feel free to add something you don't want to push
+# ex) .exe 
+*.exe
+.vscode
