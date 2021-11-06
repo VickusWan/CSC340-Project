@@ -1,22 +1,25 @@
 //
 //  ActorHashMap.cpp
-//  
+//
 //
 //  Created by Brandon on 11/6/21.
 //
 
 #include "ActorHashMap.hpp"
-#include "Movie.h"
+#include "Movie.hpp"
 
+#include <map>
 #include <string>
 #include <vector>
 
 namespace ActorHashMap_NS
 {
 
+using namespace std;
+
 ActorHashMap::ActorHashMap()
 {
-  
+  multimap<string, Movie> = new multimap<>();
 }
 
 vector<Movie> ActorHashMap::getMovies(string actorName)
@@ -27,9 +30,10 @@ vector<Movie> ActorHashMap::getMovies(string actorName)
      iterator */
   for (auto itr = actorMap.begin(); itr != actorMap.end(); itr++)
   {
-    if (itr -> first == key) // if the itr -> first points to wanted actor
+    if (itr -> first == actorName) // if the itr -> first points to wanted actor
       movies.push_back(itr -> second); // push the movie to the vector
   } // end for
+  return movies;
 } // end getMovies
 
 void ActorHashMap::addMovie(string actorName, Movie movie)
