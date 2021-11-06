@@ -7,6 +7,9 @@
 
 #include "MovieHashMap.hpp"
 
+#include <string>
+#include <vector>
+
 namespace MovieHashMap_NS {
 
 MovieHashMap::MovieHashMap() {

@@ -8,13 +8,18 @@
 #ifndef MovieHashMap_hpp
 #define MovieHashMap_hpp
 
+#include "Movie.h"
+
+#include <string>
+#include <vector>
+
 namespace MovieHashMap_NS {
 class MovieHashMap {
   public:
-  Vector<Movie> getMovies(String genre);
+  vector<Movie> getMovies(string genre);
   
   private:
-  multimap<String, Movie> movieMap;
+  multimap<string, Movie> movieMap;
   
   
 } // end MovieHashMap
