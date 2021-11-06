@@ -34,6 +34,7 @@ vector<Movie> ActorHashMap::getMovies(string actorName)
 
 void ActorHashMap::addMovie(string actorName, Movie movie)
 {
+  // adds key/value pair to multimap
   actorMap.insert(make_pair(actorName, movie));
 } // end addMovie
 
