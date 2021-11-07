@@ -6,29 +6,14 @@
 #include <regex>
 
 struct movies {
-    //temp values
-    // std::string TempBudget, TempGenres, TempHomepage, TempID, TempKeywords;
-    // std::string TempOriginal_language, TempOriginal_title, TempOverview, TempPopularity;
-    // std::string TempProduction_companies, TempProduction_countries, TempRelease_date, TempRevenue;
-    // std::string TempRuntime, TempSpoken_languages, TempStatus, TempTagline, TempTitle, TempVote_average, TempVote_count;
-
-    //vectors to store data
-    // std::vector<std::string> budget, genres, homepage, id, keywords, original_Language, original_Title;
-    // std::vector<std::string> overview, popularity, production_Companies, production_Countries;
-    // std::vector<std::string> realese_date, revenue, runtime, spoken_Language, status, tagline;
-    // std::vector<std::string> title, vote_Average, vote_Count;
+    // vectors to store data
     std::vector<std::string> genres, originalTitle, overview, runtime,voteAverage;
 };
 
 struct credits {
-    //temp values
-    std::string TempMovieID, TempName, TempCast, TempCrew;
-
-    //vectors to store data
-    std::vector<std::string> movieID;
+    // vectors to store data
     std::vector<std::string> title;
     std::vector<std::string> cast;
-    std::vector<std::string> crew;
 };
 
 // check if the string is number, or not 
@@ -48,14 +33,12 @@ void moviesDataSet() {
 
     movies data;
     std::string line;
-    std::string genreBlock;
-    std::string genre;
-    std::string dump;
     int index = 0;
 
     std::string TempBudget, TempGenres, TempHomepage, TempID, TempKeywords, TempOriginalLanguage, TempOriginalTitle, TempOverview, TempPopularity;
     std::string  TempProductionCompanies, TempProductionCountries, TempReleaseDate, TempRevenue, TempRuntime, TempSpokenLanguages, TempStatus, TempTagline, TempTitle, TempVoteAverage;
 
+    // read line by line
     while (std::getline(dataSet, line))
     {
         // ignore header
@@ -66,19 +49,20 @@ void moviesDataSet() {
         }
         std::stringstream ss(line);
 
-        //Fix me, we need to trim information before storing data to properly work
-
-        //get lines to store                                     //storing data
-        std::getline(ss, TempBudget, ',');                  // data.budget.push_back(data.TempBudget);
-        std::getline(ss, TempGenres, ']');                  // data.genres.push_back(data.TempGenres);
+        // get column by column                                 
+        std::getline(ss, TempBudget, ','); 
+        std::getline(ss, TempGenres, ']');
 
         // chunk: series of genres
-        // ex) "[{""id"": 28, ""name"": ""Action""}, {""id"": 12, ""name"": ""Adventure""}, {""id"": 14, ""name"": ""Fantasy""}, {""id"": 878, ""name"": ""Science Fiction""}
+        // e.g) "[{""id"": 28, ""name"": ""Action""}, {""id"": 12, ""name"": ""Adventure""}, {""id"": 14, ""name"": ""Fantasy""}, {""id"": 878, ""name"": ""Science Fiction""}
         std::stringstream chunk(TempGenres);
 
         // genreBlock: one part of genre block
-        // ex) [{""id"": 28, ""name"": ""Action""}
+        // e.g) [{""id"": 28, ""name"": ""Action""}
         std::string genreList="";
+        std::string genreBlock;
+        std::string dump;
+        // get one genre by genre
         while(std::getline(chunk, genreBlock,','))
         {
             std::size_t found = genreBlock.find("name");
@@ -96,11 +80,11 @@ void moviesDataSet() {
         }
         data.genres.push_back(genreList);
         std::getline(ss, dump,',');
-        std::getline(ss, TempHomepage, ',');                // data.homepage.push_back(data.TempHomepage);
-        std::getline(ss, TempID, ',');                      // data.id.push_back(data.TempID);
-        std::getline(ss, TempKeywords, ']');                // data.keywords.push_back(data.TempKeywords);
+        std::getline(ss, TempHomepage, ',');       
+        std::getline(ss, TempID, ',');          
+        std::getline(ss, TempKeywords, ']');          
         std::getline(ss, dump,',');
-        std::getline(ss, TempOriginalLanguage, ',');       // data.original_Language.push_back(data.TempOriginal_language);
+        std::getline(ss, TempOriginalLanguage, ',');    
         std::getline(ss, TempOriginalTitle, ',');          
         data.originalTitle.push_back(TempOriginalTitle);
         
@@ -113,23 +97,23 @@ void moviesDataSet() {
         }
         data.overview.push_back(overviewSentence);  
 
-        std::getline(ss, TempPopularity, ',');              // data.popularity.push_back(data.TempPopularity);
-        std::getline(ss, TempProductionCompanies, ']');     // data.production_Companies.push_back(data.TempProduction_companies);
+        std::getline(ss, TempPopularity, ',');           
+        std::getline(ss, TempProductionCompanies, ']');  
         std::getline(ss, dump,',');
-        std::getline(ss, TempProductionCountries, ']');     // data.production_Countries.push_back(data.TempProduction_countries);
+        std::getline(ss, TempProductionCountries, ']');    
         std::getline(ss, dump,',');
-        std::getline(ss, TempReleaseDate, ',');             // data.realese_date.push_back(data.TempRelease_date);
-        std::getline(ss, TempRevenue, ',');                 // data.revenue.push_back(data.TempRevenue);
-        std::getline(ss, TempRuntime, ',');                 // data.runtime.push_back(data.TempRuntime);
+        std::getline(ss, TempReleaseDate, ',');        
+        std::getline(ss, TempRevenue, ',');              
+        std::getline(ss, TempRuntime, ',');               
         data.runtime.push_back(TempRuntime);
-        std::getline(ss, TempSpokenLanguages, ']');         // data.spoken_Language.push_back(data.TempSpoken_languages);
+        std::getline(ss, TempSpokenLanguages, ']');         
         std::getline(ss, dump,',');
-        std::getline(ss, TempStatus, ',');                  // data.status.push_back(data.TempStatus);
-        std::getline(ss, TempTagline, ',');                 // data.tagline.push_back(data.TempTagline);
-        std::getline(ss, TempTitle, ',');                   // data.title.push_back(data.TempTitle);
-        std::getline(ss, TempVoteAverage, ',');             // data.vote_Average.push_back(data.TempVote_average);
+        std::getline(ss, TempStatus, ',');               
+        std::getline(ss, TempTagline, ',');            
+        std::getline(ss, TempTitle, ',');                 
+        std::getline(ss, TempVoteAverage, ',');             
         data.voteAverage.push_back(TempVoteAverage);
-        // std::getline(ss, data.TempVote_count, '\n');             data.vote_Count.push_back(data.TempVote_count);
+        
 
         index++;
     }
@@ -140,29 +124,62 @@ void moviesDataSet() {
 }
 
 void creditsDataSet() {
-    std::ifstream dataSet("data/tmdb_5000_credits.csv");
+    std::string openFilePath = "data/tmdb_5000_credits.csv";
+    std::ifstream dataSet(openFilePath);
 
     credits data;
     std::string line;
+    std::string TempMovieID, TempTitle, TempCast;
     int index = 0;
 
+    // read line by line
     while (std::getline(dataSet, line))
     {
+        // ignore header
+        if (index==0)
+        {
+            index++;
+            continue;
+        }
         std::stringstream ss(line);
 
-        //Fix me, we need to trim extra characters before storing information to properly work
+        // get column by column                
+        std::getline(ss, TempMovieID, ',');    
+        std::getline(ss, TempTitle, ',');        
+        data.title.push_back(TempTitle);
+        std::getline(ss, TempCast, ']');   
 
-        //get lines to store                         //storing data
-        std::getline(ss, data.TempMovieID, ',');     data.movieID.push_back(data.TempMovieID);
-        std::getline(ss, data.TempName, ',');        data.title.push_back(data.TempName);
-        std::getline(ss, data.TempCast, ',');        data.cast.push_back(data.TempCast);
-        std::getline(ss, data.TempCrew, '\n');       data.crew.push_back(data.TempCrew);
-        index = index + 1;
+        // chunk: a series of casts
+        // e.g) [{"cast_id": 242, "character": "Jake Sully", "credit_id": "5602a8a7c3a3685532001c9a", "gender": 2, "id": 65731, "name": "Sam Worthington", "order": 0}, ...
+        std::stringstream chunk(TempCast);
+
+        // castBlock: one part of cast block
+        // e.g) [{"cast_id": 76, "character": "Tony Stark / Iron Man", "credit_id": "55e256d292514162cd000e40", "gender": 2, "id": 3223, "name": "Robert Downey Jr.", "order": 0}
+        std::string castList="";
+        std::string castBlock;
+        std::string dump;
+        // get one cast by cast
+        while(std::getline(chunk, castBlock,'}'))
+        {
+            std::size_t found = castBlock.find("name");
+            // check if there is cast at least one
+            if (found!=std::string::npos)
+            {
+                std::string castTail = castBlock.substr(found+10);
+                std::size_t order = castTail.find("order");
+                std::string cast = castTail.substr(0, order-6);
+                // create cast list
+                castList += cast;
+                castList += ",";
+            }
+        }
+        data.cast.push_back(castList);
+        
+        index++;
     }
 
-    /*for (int i = 0; i < index; i++) {
-        std::cout << "ID: " << data.movieID[i] << " TITLE: " << data.title[i] << " CAST: " << data.cast[i] << " CREW: " << data.crew[i] << std::endl;
-    }*/
+     // check vector contents, delete later
+    std::cout << " TITLE: " << data.title.at(0) << " CAST: " << data.cast.at(0) << std::endl;
 }
 
 int main()
