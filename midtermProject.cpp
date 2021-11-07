@@ -17,7 +17,7 @@ struct movies {
     // std::vector<std::string> overview, popularity, production_Companies, production_Countries;
     // std::vector<std::string> realese_date, revenue, runtime, spoken_Language, status, tagline;
     // std::vector<std::string> title, vote_Average, vote_Count;
-    std::vector<std::string> genres, originalTitle, overview;
+    std::vector<std::string> genres, originalTitle, overview, runtime,voteAverage;
 };
 
 struct credits {
@@ -53,7 +53,8 @@ void moviesDataSet() {
     std::string dump;
     int index = 0;
 
-    std::string TempBudget, TempGenres, TempHomepage, TempID, TempKeywords, TempOriginalLanguage, TempOriginalTitle, TempOverview;
+    std::string TempBudget, TempGenres, TempHomepage, TempID, TempKeywords, TempOriginalLanguage, TempOriginalTitle, TempOverview, TempPopularity;
+    std::string  TempProductionCompanies, TempProductionCountries, TempReleaseDate, TempRevenue, TempRuntime, TempSpokenLanguages, TempStatus, TempTagline, TempTitle, TempVoteAverage;
 
     while (std::getline(dataSet, line))
     {
@@ -100,7 +101,8 @@ void moviesDataSet() {
         std::getline(ss, TempKeywords, ']');                // data.keywords.push_back(data.TempKeywords);
         std::getline(ss, dump,',');
         std::getline(ss, TempOriginalLanguage, ',');       // data.original_Language.push_back(data.TempOriginal_language);
-        std::getline(ss, TempOriginalTitle, ',');          data.originalTitle.push_back(TempOriginalTitle);
+        std::getline(ss, TempOriginalTitle, ',');          
+        data.originalTitle.push_back(TempOriginalTitle);
         
         // there is comma in overview, so read strings until the end of overview
         std::string overviewSentence="";
@@ -111,27 +113,29 @@ void moviesDataSet() {
         }
         data.overview.push_back(overviewSentence);  
 
-        // std::getline(ss, data.TempPopularity, ',');              data.popularity.push_back(data.TempPopularity);
-        // std::getline(ss, data.TempProduction_companies, ']');    data.production_Companies.push_back(data.TempProduction_companies);
-        // std::getline(ss, dump,',');
-        // std::getline(ss, data.TempProduction_countries, ']');    data.production_Countries.push_back(data.TempProduction_countries);
-        // std::getline(ss, dump,',');
-        // std::getline(ss, data.TempRelease_date, ',');            data.realese_date.push_back(data.TempRelease_date);
-        // std::getline(ss, data.TempRevenue, ',');                 data.revenue.push_back(data.TempRevenue);
-        // std::getline(ss, data.TempRuntime, ',');                 data.runtime.push_back(data.TempRuntime);
-        // std::getline(ss, data.TempSpoken_languages, ']');        data.spoken_Language.push_back(data.TempSpoken_languages);
-        // std::getline(ss, dump,',');
-        // std::getline(ss, data.TempStatus, ',');                  data.status.push_back(data.TempStatus);
-        // std::getline(ss, data.TempTagline, ',');                 data.tagline.push_back(data.TempTagline);
-        // std::getline(ss, data.TempTitle, ',');                   data.title.push_back(data.TempTitle);
-        // std::getline(ss, data.TempVote_average, ',');            data.vote_Average.push_back(data.TempVote_average);
+        std::getline(ss, TempPopularity, ',');              // data.popularity.push_back(data.TempPopularity);
+        std::getline(ss, TempProductionCompanies, ']');     // data.production_Companies.push_back(data.TempProduction_companies);
+        std::getline(ss, dump,',');
+        std::getline(ss, TempProductionCountries, ']');     // data.production_Countries.push_back(data.TempProduction_countries);
+        std::getline(ss, dump,',');
+        std::getline(ss, TempReleaseDate, ',');             // data.realese_date.push_back(data.TempRelease_date);
+        std::getline(ss, TempRevenue, ',');                 // data.revenue.push_back(data.TempRevenue);
+        std::getline(ss, TempRuntime, ',');                 // data.runtime.push_back(data.TempRuntime);
+        data.runtime.push_back(TempRuntime);
+        std::getline(ss, TempSpokenLanguages, ']');         // data.spoken_Language.push_back(data.TempSpoken_languages);
+        std::getline(ss, dump,',');
+        std::getline(ss, TempStatus, ',');                  // data.status.push_back(data.TempStatus);
+        std::getline(ss, TempTagline, ',');                 // data.tagline.push_back(data.TempTagline);
+        std::getline(ss, TempTitle, ',');                   // data.title.push_back(data.TempTitle);
+        std::getline(ss, TempVoteAverage, ',');             // data.vote_Average.push_back(data.TempVote_average);
+        data.voteAverage.push_back(TempVoteAverage);
         // std::getline(ss, data.TempVote_count, '\n');             data.vote_Count.push_back(data.TempVote_count);
 
         index++;
     }
 
     // check vector contents, delete later
-    std::cout << data.genres.at(0) << " " << data.originalTitle.at(0)  << " " <<  data.overview.at(0) << std::endl;
+    std::cout << data.genres.at(0) << " " << data.originalTitle.at(0)  << " " <<  data.overview.at(0) << " " << data.runtime.at(0) << " " << data.voteAverage.at(0) << std::endl;
 
 }
 
