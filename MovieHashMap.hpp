@@ -15,14 +15,16 @@
 #include <vector>
 
 namespace MovieHashMap_NS {
+
+using namespace std;
 class MovieHashMap {
   public:
-  MovieHashMap();
-  vector<Movie> getMovies(string genre);
-  void addMovie(string genre, Movie movie)
+  vector<Movie_NS::Movie> getMovies(string genre); // returns movies in vector
+  void addMovie(string genre, Movie_NS::Movie movie); // add movie to map
   
   private:
-  multimap<string, Movie> movieMap;
+  multimap<string, Movie_NS::Movie> movieMap; // creates multimap
+  
   
   
 } // end MovieHashMap

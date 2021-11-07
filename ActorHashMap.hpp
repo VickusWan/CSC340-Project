@@ -17,16 +17,18 @@
 
 namespace ActorHashMap_NS {
 
+using namespace std;
+
 class ActorHashMap {
   public:
-  ActorhashMap();
-  vector<Movie> getMovies(string actorName);
-  void addMovie(string actorName, Movie movie);
+ 
+  vector<Movie_NS::Movie> getMovies(string actorName);
+  void addMovie(string actorName, Movie_NS::Movie movie);
   
   private:
-  multimap<string, Movie> actorMap;
+  multimap<string, Movie_NS::Movie> actorMap;
   
-}
+};
 
 } // end ActorHashMap_NS
 

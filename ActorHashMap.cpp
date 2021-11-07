@@ -17,14 +17,11 @@ namespace ActorHashMap_NS
 
 using namespace std;
 
-ActorHashMap::ActorHashMap()
-{
-  multimap<string, Movie> = new multimap<>();
-}
 
-vector<Movie> ActorHashMap::getMovies(string actorName)
+
+vector<Movie_NS::Movie> ActorHashMap::getMovies(string actorName)
 {
-  vector<Movie> movies; // vector to hold movies to return
+  vector<Movie_NS::Movie> movies; // vector to hold movies to return
   
   /* iterator to begin at map start, iterate until map end, and increment
      iterator */
@@ -36,7 +33,7 @@ vector<Movie> ActorHashMap::getMovies(string actorName)
   return movies;
 } // end getMovies
 
-void ActorHashMap::addMovie(string actorName, Movie movie)
+void ActorHashMap::addMovie(string actorName, Movie_NS::Movie movie)
 {
   // adds key/value pair to multimap
   actorMap.insert(make_pair(actorName, movie));

@@ -16,19 +16,15 @@ namespace MovieHashMap_NS
 
 using namespace std;
 
-MovieHashMap::MovieHashMap()
-{
-  multimap<string, Movie> movieMap = new multimap<>();
-}
 
-void MovieHashMap::addMovie(string genre, Movie movie)
+void MovieHashMap::addMovie(string genre, Movie_NS::Movie movie)
 {
   movieMap.insert(make_pair(genre, movie));
 } // end addMovie
 
-vector<Movie> MovieHashMap::getMovies(string genre)
+vector<Movie_NS::Movie> MovieHashMap::getMovies(string genre)
 {
-  vector<Movie> movies; // vector to return movies
+  vector<Movie_NS::Movie> movies; // vector to return movies
   
   // iterator start at map begin, go until map end, increment iterator
   for (auto itr = movieMap.begin(); itr != movieMap.end(); itr++)
