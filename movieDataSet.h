@@ -13,7 +13,7 @@ namespace NS_MOVIE_DATA_SET {
     };
    
    // these are prototype of functions
-   movies moviesDataSet();
+   movies movieDataSet();
 }
 
 #endif

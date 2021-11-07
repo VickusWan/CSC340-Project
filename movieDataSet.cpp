@@ -20,7 +20,7 @@ bool isNumber(const std::string& str) {
     return numberCheck;
 }
 
-movies moviesDataSet() {
+movies movieDataSet() {
     std::string openFilePath = "data/tmdb_5000_movies.csv";
     std::ifstream dataSet(openFilePath);
 
@@ -112,7 +112,7 @@ movies moviesDataSet() {
     }
 
     // check vector contents, delete later
-    std::cout << data.genres.at(0) << " " << data.originalTitle.at(0)  << " " <<  data.overview.at(0) << " " << data.runtime.at(0) << " " << data.voteAverage.at(0) << std::endl;
+    // std::cout << data.genres.at(0) << " " << data.originalTitle.at(0)  << " " <<  data.overview.at(0) << " " << data.runtime.at(0) << " " << data.voteAverage.at(0) << std::endl;
 
     return data;
 }
