@@ -8,9 +8,13 @@
 
 namespace NS_CREDIT_DATA_SET {
 
-void creditDataSet() {
+void creditsDataSet() {
     std::string openFilePath = "data/tmdb_5000_credits.csv";
     std::ifstream dataSet(openFilePath);
+    
+    std::ofstream outputFile;
+    file.open("credits.csv");
+    
 
     credits data;
     std::string line;
@@ -59,6 +63,10 @@ void creditDataSet() {
             }
         }
         data.cast.push_back(castList);
+        
+        std::string inputLine;
+        inputLine = TempTitle + "," + castList;
+        outputFile << inputLine << std::endl;
         
         index++;
     }
