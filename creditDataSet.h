@@ -15,7 +15,7 @@ namespace NS_CREDIT_DATA_SET {
 
    
    // these are prototype of functions
-   credits creditDataSet();
+   void creditDataSet();
 }
 
 #endif

@@ -8,7 +8,7 @@
 
 namespace NS_CREDIT_DATA_SET {
 
-void creditsDataSet() {
+void creditDataSet() {
     std::string openFilePath = "data/tmdb_5000_credits.csv";
     std::ifstream dataSet(openFilePath);
 
