@@ -9,13 +9,14 @@
 namespace NS_CREDIT_DATA_SET {
    struct credits {
         // vectors to store data
+       std::vector<std::string> movieID;
         std::vector<std::string> title;
         std::vector<std::string> cast;
     };
 
    
    // these are prototype of functions
-   void creditDataSet();
+   credits creditDataSet();
 }
 
 #endif

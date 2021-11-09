@@ -3,23 +3,22 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <iomanip>
+
 
 #include "creditDataSet.h"
 
 namespace NS_CREDIT_DATA_SET {
 
-void creditsDataSet() {
+credits creditDataSet() {
     std::string openFilePath = "data/tmdb_5000_credits.csv";
     std::ifstream dataSet(openFilePath);
-    
-    std::ofstream outputFile;
-    file.open("credits.csv");
-    
 
     credits data;
     std::string line;
     std::string TempMovieID, TempTitle, TempCast;
     int index = 0;
+    
 
     // read line by line
     while (std::getline(dataSet, line))
@@ -36,6 +35,7 @@ void creditsDataSet() {
         std::getline(ss, TempMovieID, ',');    
         std::getline(ss, TempTitle, ',');        
         data.title.push_back(TempTitle);
+        data.movieID.push_back(TempMovieID);
         std::getline(ss, TempCast, ']');   
 
         // chunk: a series of casts
@@ -62,17 +62,20 @@ void creditsDataSet() {
                 castList += ",";
             }
         }
+        //std::cout << TempTitle << std::endl;
+
+        //std::cout << castList << std::endl;
         data.cast.push_back(castList);
-        
-        std::string inputLine;
-        inputLine = TempTitle + "," + castList;
-        outputFile << inputLine << std::endl;
         
         index++;
     }
 
+    
+    
      // check vector contents, delete later
     // std::cout << " TITLE: " << data.title.at(0) << " CAST: " << data.cast.at(0) << std::endl;
+    
+    return data;
 }
 
 }

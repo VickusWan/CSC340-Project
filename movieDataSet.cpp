@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <regex>
+#include <stdlib.h>
 
 #include "movieDataSet.h"
 
@@ -71,15 +72,17 @@ movies movieDataSet() {
                 genreList += ",";
             }
         }
-        data.genres.push_back(genreList);
+        //data.genres.push_back(genreList);
         std::getline(ss, dump,',');
         std::getline(ss, TempHomepage, ',');       
         std::getline(ss, TempID, ',');          
         std::getline(ss, TempKeywords, ']');          
         std::getline(ss, dump,',');
         std::getline(ss, TempOriginalLanguage, ',');    
-        std::getline(ss, TempOriginalTitle, ',');          
-        data.originalTitle.push_back(TempOriginalTitle);
+        std::getline(ss, TempOriginalTitle, ',');
+        
+        //data.movieID.push_back(TempID);
+        //data.originalTitle.push_back(TempOriginalTitle);
         
         // there is comma in overview, so read strings until the end of overview
         std::string overviewSentence="";
@@ -88,7 +91,7 @@ movies movieDataSet() {
             overviewSentence += TempOverview;
             std::getline(ss, TempOverview, ',');
         }
-        data.overview.push_back(overviewSentence);  
+        //data.overview.push_back(overviewSentence);
 
         std::getline(ss, TempPopularity, ',');           
         std::getline(ss, TempProductionCompanies, ']');  
@@ -98,14 +101,27 @@ movies movieDataSet() {
         std::getline(ss, TempReleaseDate, ',');        
         std::getline(ss, TempRevenue, ',');              
         std::getline(ss, TempRuntime, ',');               
-        data.runtime.push_back(TempRuntime);
+        //data.runtime.push_back(TempRuntime);
         std::getline(ss, TempSpokenLanguages, ']');         
         std::getline(ss, dump,',');
         std::getline(ss, TempStatus, ',');               
         std::getline(ss, TempTagline, ',');            
         std::getline(ss, TempTitle, ',');                 
-        std::getline(ss, TempVoteAverage, ',');             
-        data.voteAverage.push_back(TempVoteAverage);
+        std::getline(ss, TempVoteAverage, ',');
+        
+        try {
+            data.voteAverage.push_back(std::stod(TempVoteAverage));
+            data.genres.push_back(genreList);
+            data.movieID.push_back(TempID);
+            data.originalTitle.push_back(TempOriginalTitle);
+            data.overview.push_back(overviewSentence);
+            data.runtime.push_back(TempRuntime);
+            
+        }
+        catch (...) {
+            continue;
+        }
+        
         
 
         index++;
