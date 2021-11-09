@@ -9,10 +9,12 @@ namespace Movie_NS {
         Movie::Movie(std::string newTitle, double newVoteAverage);
         std::string GetTitle();
         double GetAverage();
-        
+        std::string GetGenre();
+
         private:
         std::string title;
         double voteAverage;
+        std::string genre;
     }
 
 }
