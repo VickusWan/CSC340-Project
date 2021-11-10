@@ -23,11 +23,12 @@ vector<Movie_NS::Movie> ActorHashMap::getMovies(string actorName)
 {
   vector<Movie_NS::Movie> movies; // vector to hold movies to return
   
+  int count = 0;
   /* iterator to begin at map start, iterate until map end, and increment
      iterator */
   for (auto itr = actorMap.begin(); itr != actorMap.end(); itr++)
   {
-    if (itr -> first == actorName) // if the itr -> first points to wanted actor
+    if (itr -> first == actorName && count != 5) // if the itr -> first points to wanted actor
       movies.push_back(itr -> second); // push the movie to the vector
   } // end for
   return movies;

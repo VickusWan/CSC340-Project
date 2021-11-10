@@ -25,11 +25,12 @@ void MovieHashMap::addMovie(string genre, Movie_NS::Movie movie)
 vector<Movie_NS::Movie> MovieHashMap::getMovies(string genre)
 {
   vector<Movie_NS::Movie> movies; // vector to return movies
-  
+    
+  int count = 0; // count to only retrieve 5 movies
   // iterator start at map begin, go until map end, increment iterator
   for (auto itr = movieMap.begin(); itr != movieMap.end(); itr++)
   {
-    if (itr -> first == genre) // if the itr -> first points to wanted genre
+    if (itr -> first == genre && count != 5) // if the itr -> first points to wanted genre
       movies.push_back(itr -> second); // push the movie to the vector
   }
   return movies;
