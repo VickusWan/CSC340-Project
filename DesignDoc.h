@@ -23,10 +23,13 @@
  ******************************
     1. read in csv data source files
     2. clean up files for what we need
+        These steps are done in Credit and Movie data set
     3. put data into hashmaps
     4. main menu querying if user wants to search by genre or actor
     5. user input of genre/actor based on choice
     6. return movie recommendations
+        This is accomplished by using the user input to
+        query the different HashMaps 
  
  
  ******************************
