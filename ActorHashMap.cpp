@@ -5,8 +5,8 @@
 //  Created by Brandon on 11/6/21.
 //
 
-#include "ActorHashMap.hpp"
-#include "Movie.hpp"
+#include "ActorHashMap.h"
+#include "Movie.h"
 
 #include <map>
 #include <string>

@@ -5,7 +5,7 @@
 //  Created by Brandon on 11/6/21.
 //
 
-#include "MovieHashMap.hpp"
+#include "MovieHashMap.h"
 
 #include <map>
 #include <string>
