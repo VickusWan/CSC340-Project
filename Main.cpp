@@ -16,33 +16,39 @@
 void menu(std::string select) {
    
         if (select == "genre") {
-            std::string movie;
+            std::string genre;
             MovieHashMap_NS::MovieHashMap* movieMap = new MovieHashMap_NS::MovieHashMap();
-            int index = 0;
-            std::vector<int> location;
 
             NS_MOVIE_DATA_SET::movies manageData = NS_MOVIE_DATA_SET::movieDataSet();
+
+            /*for (long unsigned int i = 0; i < manageData.genres.size(); i++) {
+                std::cout << "genre " << i << ": " << manageData.genres[i] << std::endl;    //printing genres vector
+            }*/
 
             std::cin.ignore();
             std::cout << std::endl;
             std::cout << "What is the genre you like?" << std::endl;
-            std::getline(std::cin, movie);
+            std::getline(std::cin, genre);
 
-            for (long unsigned int i = 0; i < manageData.genres.size(); i++) {  //function to look for the genre in every
-                std::stringstream ss(manageData.genres[i]);                     //genre of a movie, if the genre is found
-                std::string temp;                                               //save location where found it
-                                                                                //needs to be fixed
-                while (ss >> temp) {
+            for (long unsigned int i = 0; i < manageData.originalTitle.size(); i++) {
 
-                    if (temp.compare(movie) == 0) {
-                        location[index] = i;
-                        index++;
+                std::string title = manageData.originalTitle.at(i);
+                std::string genre = manageData.genres.at(i);
+                double vote = manageData.voteAverage.at(i);
+                std::string runtime = manageData.runtime.at(i);
+                std::string overview = manageData.overview.at(i);
+                Movie_NS::Movie movie(title, genre, vote, runtime, overview);
 
-                    }
-                }
+                movieMap->addMovie(genre, movie);
+
             }
 
-            //printing movies with that genre
+            std::vector<Movie_NS::Movie> movies = movieMap->getMovies(genre);
+
+            for (Movie_NS::Movie movie : movies) {
+                std::cout << std::endl;
+                std::cout << "Some other movies with " << genre << " genre: " << movie.getTitle() << std::endl;
+            }
 
             std::cout << std::endl;
         }
@@ -55,6 +61,7 @@ void menu(std::string select) {
             std::vector<int> location;
 
             NS_CREDIT_DATA_SET::credits manageData = NS_CREDIT_DATA_SET::creditDataSet();
+            NS_MOVIE_DATA_SET::movies manageMoviesData = NS_MOVIE_DATA_SET::movieDataSet();
 
             /*for (long unsigned int i = 0; i < manageData.cast.size(); i++) {
                 std::cout << "actor "<< i << ": " << manageData.cast[i] << std::endl;    //printing cast vector
@@ -63,32 +70,24 @@ void menu(std::string select) {
             std::cin.ignore();
             std::cout << std::endl;
             std::cout << "What is the name of your actor?" << std::endl;
-            std::getline(std::cin, actor);
-
-            for (long unsigned int i = 0; i < manageData.cast.size(); i++) {  //function to look for the actor in every
-                std::stringstream ss(manageData.cast[i]);                     //cast movie, if the actor is found
-                std::string temp;                                             //save location where found it
-                                                                              //needs to be fixed
-                while (ss >> temp) {
-
-                    if (temp.compare(actor) == 0) {
-                        location[index] = i;
-                        index++;
-                        
-                    }
-                }
-            }    
+            std::getline(std::cin, actor);  
             
-            //I'm not sure how hashmaps work but I tried to add the movies where the actor was found to the hashmap
-            //it will save the data from the location where the actor was found
-            std::vector<Movie_NS::Movie> actorMovies;
-            while (index < location.size()) {
-                Movie_NS::Movie actorMovies{ NS_CREDIT_DATA_SET::creditDataSet().title[location[index]], NS_MOVIE_DATA_SET::movieDataSet().genres[location[index]], NS_MOVIE_DATA_SET::movieDataSet().voteAverage[location[index]], NS_CREDIT_DATA_SET::creditDataSet().cast[location[index]], NS_CREDIT_DATA_SET::creditDataSet().movieID[location[index]] };
-                actorMap->addMovie(actor, actorMovies);
-                index++;
+            for (long unsigned int i = 0; i < manageData.cast.size(); i++) {
+
+                //credits data set
+                std::string title = manageData.title.at(i);
+                std::string cast = manageData.cast.at(i);
+
+                //movies data set //not needed
+                double vote = manageMoviesData.voteAverage.at(i);
+                std::string runtime = manageMoviesData.runtime.at(i);
+                std::string overview = manageMoviesData.overview.at(i);
+                Movie_NS::Movie movie(title, cast, vote, runtime, overview);
+
+                actorMap->addMovie(actor, movie);
+
             }
-            
-            //In this part I followed Brandon's code to print a recommendation
+
             std::vector<Movie_NS::Movie> movies = actorMap->getMovies(actor);
 
             for (Movie_NS::Movie movie : movies) {
