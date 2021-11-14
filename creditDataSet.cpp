@@ -58,23 +58,17 @@ credits creditDataSet() {
                 std::size_t order = castTail.find("order");
                 std::string cast = castTail.substr(0, order-6);
                 // create cast list
-                castList += cast;
-                castList += ",";
+                
+                
+                data.cast.push_back(cast);
+                break;
+                //castList += cast;
+                //castList += ",";
             }
         }
-        //std::cout << TempTitle << std::endl;
-
-        //std::cout << castList << std::endl;
-        data.cast.push_back(castList);
         
         index++;
     }
-
-    
-    
-     // check vector contents, delete later
-    // std::cout << " TITLE: " << data.title.at(0) << " CAST: " << data.cast.at(0) << std::endl;
-    
     return data;
 }
 

@@ -68,8 +68,9 @@ movies movieDataSet() {
                 std::string genre = genreTail.substr(0, genreTail.length()-3);
 
                 // create genre list
-                genreList += genre;
-                genreList += ",";
+                data.genres.push_back(genre);
+                //genreList += genre;
+                //genreList += ",";
             }
         }
         //data.genres.push_back(genreList);
@@ -109,9 +110,10 @@ movies movieDataSet() {
         std::getline(ss, TempTitle, ',');                 
         std::getline(ss, TempVoteAverage, ',');
         
+        
         try {
-            data.voteAverage.push_back(std::stod(TempVoteAverage));
-            data.genres.push_back(genreList);
+            //data.voteAverage.push_back(std::stod(TempVoteAverage));
+            //data.genres.push_back(genreList);
             data.movieID.push_back(TempID);
             data.originalTitle.push_back(TempOriginalTitle);
             data.overview.push_back(overviewSentence);
