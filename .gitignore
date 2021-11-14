@@ -2,3 +2,4 @@
 # ex) .exe 
 *.exe
 .vscode
+.DS_STORE
