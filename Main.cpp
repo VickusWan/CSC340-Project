@@ -1,9 +1,9 @@
 //adding files
-#include "ActorHashMap.h"
 #include "Movie.h"
 #include "MovieHashMap.h"
 #include "creditDataSet.h"
 #include "movieDataSet.h"
+#include "ActorHashMap.h"
 
 #include <fstream>
 #include <sstream>
@@ -13,95 +13,89 @@
 #include <iomanip>
 #include <map>
 
-void menu(std::string select) {
-   
+void menu(std::string select, MovieHashMap_NS::MovieHashMap* movieMap, MovieHashMap_NS::MovieHashMap* actorMap) {
+        
         if (select == "genre") {
+            
             std::string genre;
-            MovieHashMap_NS::MovieHashMap* movieMap = new MovieHashMap_NS::MovieHashMap();
-
-            NS_MOVIE_DATA_SET::movies manageData = NS_MOVIE_DATA_SET::movieDataSet();
-
-            /*for (long unsigned int i = 0; i < manageData.genres.size(); i++) {
-                std::cout << "genre " << i << ": " << manageData.genres[i] << std::endl;    //printing genres vector
-            }*/
-
+            
             std::cin.ignore();
             std::cout << std::endl;
             std::cout << "What is the genre you like?" << std::endl;
             std::getline(std::cin, genre);
-
-            for (long unsigned int i = 0; i < manageData.originalTitle.size(); i++) {
-
-                std::string title = manageData.originalTitle.at(i);
-                std::string genre = manageData.genres.at(i);
-                double vote = manageData.voteAverage.at(i);
-                std::string runtime = manageData.runtime.at(i);
-                std::string overview = manageData.overview.at(i);
-                Movie_NS::Movie movie(title, genre, vote, runtime, overview);
-
-                movieMap->addMovie(genre, movie);
-
+            
+            std::vector<Movie_NS::Movie> listMovies;
+            listMovies = movieMap -> getMovies(genre);
+            
+            int count = 0;
+            for (int i = 0; i< listMovies.size(); i++) {
+                
+                std::cout << listMovies.at(i).GetTitle() << std::endl;
+                count++;
+                if (count == 5)
+                    break;
             }
-
-            std::vector<Movie_NS::Movie> movies = movieMap->getMovies(genre);
-
-            for (Movie_NS::Movie movie : movies) {
-                std::cout << std::endl;
-                std::cout << "Some other movies with " << genre << " genre: " << movie.getTitle() << std::endl;
-            }
-
-            std::cout << std::endl;
         }
 
-
         else if (select == "actor") {
+            
             std::string actor;
-            ActorHashMap_NS::ActorHashMap* actorMap = new ActorHashMap_NS::ActorHashMap();
-            int index = 0;
-            std::vector<int> location;
-
-            NS_CREDIT_DATA_SET::credits manageData = NS_CREDIT_DATA_SET::creditDataSet();
-            NS_MOVIE_DATA_SET::movies manageMoviesData = NS_MOVIE_DATA_SET::movieDataSet();
-
-            /*for (long unsigned int i = 0; i < manageData.cast.size(); i++) {
-                std::cout << "actor "<< i << ": " << manageData.cast[i] << std::endl;    //printing cast vector
-            }*/
-
+            
             std::cin.ignore();
             std::cout << std::endl;
-            std::cout << "What is the name of your actor?" << std::endl;
-            std::getline(std::cin, actor);  
+            std::cout << "What is the actor you want?" << std::endl;
+            std::getline(std::cin, actor);
             
-            for (long unsigned int i = 0; i < manageData.cast.size(); i++) {
-
-                //credits data set
-                std::string title = manageData.title.at(i);
-                std::string cast = manageData.cast.at(i);
-
-                //movies data set //not needed
-                double vote = manageMoviesData.voteAverage.at(i);
-                std::string runtime = manageMoviesData.runtime.at(i);
-                std::string overview = manageMoviesData.overview.at(i);
-                Movie_NS::Movie movie(title, cast, vote, runtime, overview);
-
-                actorMap->addMovie(actor, movie);
-
-            }
-
-            std::vector<Movie_NS::Movie> movies = actorMap->getMovies(actor);
-
-            for (Movie_NS::Movie movie : movies) {
-                std::cout << std::endl;
-                std::cout << "Some other movies " << actor << " appears in: " << movie.getTitle() << std::endl;
+            std::vector<Movie_NS::Movie> listMovies;
+            listMovies = actorMap -> getMovies(actor);
+            
+            int count = 0;
+            for (int i = 0; i< listMovies.size(); i++) {
+                
+                std::cout << listMovies.at(i).GetTitle() << std::endl;
+                count++;
+                if (count == 5)
+                    break;
             }
             
-            std::cout << std::endl;
         }
 }
 
 
 int main()
 {
+    
+    MovieHashMap_NS::MovieHashMap* movieMap = new MovieHashMap_NS::MovieHashMap();
+    NS_MOVIE_DATA_SET::movies movieData = NS_MOVIE_DATA_SET::movieDataSet();
+    
+    MovieHashMap_NS::MovieHashMap* actorMap = new MovieHashMap_NS::MovieHashMap();
+    NS_CREDIT_DATA_SET::credits creditData = NS_CREDIT_DATA_SET::creditDataSet();
+    
+    
+    for (long unsigned int i = 0; i < movieData.originalTitle.size(); i++) {
+        
+        std::string title = movieData.originalTitle.at(i);
+        std::string genre = movieData.genres.at(i);
+        double vote = 0;
+        Movie_NS::Movie m(title, genre, vote);
+        
+        movieMap -> addMovie(genre, m);
+        
+    }
+    
+    for (long unsigned int i = 0; i < creditData.cast.size(); i++) {
+        
+        if (movieData.movieID.at(i) == creditData.movieID.at(i)) {
+            std::string title = movieData.originalTitle.at(i);
+            std::string genre = movieData.genres.at(i);
+            std::string actor = creditData.cast.at(i);
+            double vote = 0;
+            Movie_NS::Movie m(title, genre, vote);
+            
+            actorMap -> addMovie(actor, m);
+        }
+    }
+    
     std::string select;
     bool x = true;
 
@@ -113,7 +107,7 @@ int main()
         std::cin >> select;
 
         if (select == "genre" || select == "actor") {
-            menu(select);
+            menu(select, movieMap, actorMap);
         }
 
         else if (select == "quit") {
