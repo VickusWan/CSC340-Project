@@ -2,7 +2,7 @@
 #include "Movie.h"
 #include "MovieHashMap.h"
 #include "creditDataSet.h"
-#include "MovieDataSet.h"
+#include "movieDataSet.h"
 #include "ActorHashMap.h"
 
 #include <fstream>
