@@ -2,7 +2,7 @@
 #include "Movie.h"
 #include "MovieHashMap.h"
 #include "creditDataSet.h"
-#include "movieDataSet.h"
+#include "MovieDataSet.h"
 #include "ActorHashMap.h"
 
 #include <fstream>
@@ -24,21 +24,21 @@ void menu(std::string select, MovieHashMap_NS::MovieHashMap* movieMap, MovieHash
 
         std::cin.ignore();
         std::cout << std::endl;
-        std::cout << "What is the genre you like?" << std::endl;
+        std::cout << "What genre would you like recommendations?" << std::endl;
         std::getline(std::cin, genre);
 
-        std::vector<Movie_NS::Movie> listMovies;
-        listMovies = movieMap->getMovies(genre);
+        std::vector<Movie_NS::Movie> listMovies = movieMap->getMovies(genre);
 
         std::cout << "Top 5 " << genre << " movies: " << std::endl;
         int count = 0;
         for (int i = 0; i < listMovies.size(); i++) {
 
-            std::cout << listMovies.at(i).GetTitle() << std::endl;
+            std::cout << "Title: " << listMovies.at(i).GetTitle() << std::endl;
             count++;
             if (count == 5)
                 break;
         }
+        std::cout << std::endl << std::endl;
     }
 
     else if (select == "actor") {
@@ -53,15 +53,18 @@ void menu(std::string select, MovieHashMap_NS::MovieHashMap* movieMap, MovieHash
         std::vector<Movie_NS::Movie> listMovies;
         listMovies = actorMap->getMovies(actor);
 
-        std::cout << "Some other movies " << actor << " appears in: " << std::endl;
+        std::cout << "Top 5 movies " << actor << " appears in: " << std::endl;
         int count = 0;
         for (int i = 0; i < listMovies.size(); i++) {
 
-            std::cout << listMovies.at(i).GetTitle() << std::endl;
+            std::cout << "Title: " << listMovies.at(i).GetTitle();
+            std::cout << "\t\tgenre: " << listMovies.at(i).GetGenre() << std::endl;
             count++;
             if (count == 5)
                 break;
         }
+
+        std::cout << std::endl << std::endl;
 
     }
     
@@ -78,8 +81,9 @@ void menu(std::string select, MovieHashMap_NS::MovieHashMap* movieMap, MovieHash
         if (total < 0) {
             total = (total * -2);
         }
-
+        std::cout << std::endl;
         std::cout << "Random movie recommendation: " << movieTitle.originalTitle.at(total) << std::endl;
+        std::cout << std::endl;
     }
 }
 
@@ -122,11 +126,11 @@ int main()
     bool x = true;
 
     while (x == true) { //menu to ask the user for a preference
-        std::cout << "Movies recommendation" << std::endl;
-        std::cout << std::endl;
-        std::cout << "Enter 'genre' to recommend a genre || Enter 'actor' to recommend an actor" << std::endl;
+        std::cout << "Movies Recommendation" << std::endl << std::endl;
+        std::cout << "Enter 'genre' for recommendations in that genre" << std::endl;
+        std::cout << "Enter 'actor' recommendations with that actor" << std::endl;
         std::cout << "Enter 'random' for a random movie" << std::endl;
-        std::cout << "or enter 'quit' to stop" << std::endl;
+        std::cout << "Enter 'quit' to stop" << std::endl;
         std::cin >> select;
 
         if (select == "genre" || select == "actor" || select == "random") {

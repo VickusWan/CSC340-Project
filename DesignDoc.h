@@ -14,7 +14,7 @@
 
 /*
  
- --------------Problem Analysis and algorith design ----------------
+ --------------Problem Analysis and algorithm design ----------------
  Problem: input: 2 different csv files
           output: movie recommendations based on user input
  
@@ -31,7 +31,70 @@
         This is accomplished by using the user input to
         query the different HashMaps 
  
+ ******************************
+ *   algortihm analysis       *
+ ******************************
+ main.cpp
+ 1. void main(std::string select, MovieHashMap_NS::MovieHashMap movieMap, MovieHashMap_NS::MovieHashMap actorMap)
+  a. input  string select, and a movie multimap and an actor multimap
+  b. output nothing, function is void
+  c. sample input:
+     the string is 'genre', 'actor' or 'random' while the multimaps are always the same
+  d. pseudocode
+  if select is 'genre'
+    string to hold genre
+    ignore whatever is in cout buffer
+    printout "What genre would you like recommendations?"
+    get users genre
+    initialize vector of movies using movieMap -> getMovies(genre)
+    for top 5 movies
+      print out "Title: "  and movie title
+  if select is 'actor'
+   string to hold actor
+   ignore whatever is in cout buffer
+   printout "What actore would you like recommendations?"
+   get users actor
+   initialize vector of movies using movieMap -> getMovies(actor)
+   for top 5 movies
+     print out "Title: "  and movie title with genre 
+  if selected random movie
+    select random movie based on random number generator and the total number of movies
  
+  e. given the use of multimaps, this should be logorithmic complexity.
+ 
+ 2. int main()
+    a. input none
+    b. output 0 if all goes well
+    c. sample input: n/a
+    d. pseudocode
+       create new movieMap
+       get the genre dataset
+       create new actorMap
+       get the credits dataset
+      
+      iterate through dataset
+        get title
+        get genre
+        get rating
+        put into Movie object
+        put Movie object into movieMap with key genre
+ 
+      iterate through dataset
+        get title
+        get genre
+        get cast
+        create movie object
+        for each cast member
+          put movie object into moviemap with key actor
+      
+        while loop for menu
+          print out Movie Recommendations
+          print out instructions for selecting genre, actor, random or quit
+          ask user for entry
+          validate entry
+          if valid, call void menu with selection
+      e. the complexity is O(n)
+          
  ******************************
  *   built-in data types      *
  ******************************
