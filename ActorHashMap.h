@@ -8,8 +8,8 @@
 #ifndef ActorHashMap_hpp
 #define ActorHashMap_hpp
 
-#include "Actor.hpp"
-#include "Movie.hpp"
+
+#include "Movie.h"
 
 #include <map>
 #include <string>

@@ -27,7 +27,7 @@ class MovieHashMap {
   
   
   
-} // end MovieHashMap
+}; // end MovieHashMap
 
 } // end MovieHashMapNS
 
