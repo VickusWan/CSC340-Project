@@ -26,7 +26,7 @@ vector<Movie_NS::Movie> ActorHashMap::getMovies(string actorName)
   int count = 0;
   /* iterator to begin at map start, iterate until map end, and increment
      iterator */
-  for (auto itr = actorMap.begin(); itr != actorMap.end(); itr++)
+  for (std::multimap<string,Movie_NS::Movie>::iterator itr = actorMap.begin(); itr != actorMap.end(); itr++)
   {
     if (itr -> first == actorName && count != 5) // if the itr -> first points to wanted actor
       movies.push_back(itr -> second); // push the movie to the vector
