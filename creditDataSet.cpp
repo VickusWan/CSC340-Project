@@ -12,6 +12,8 @@ namespace NS_CREDIT_DATA_SET {
 
 credits creditDataSet() {
     std::string openFilePath = "data/tmdb_5000_credits.csv";
+
+
     std::ifstream dataSet(openFilePath);
 
     credits data;
@@ -27,6 +29,7 @@ credits creditDataSet() {
         if (index==0)
         {
             index++;
+            
             continue;
         }
         std::stringstream ss(line);
